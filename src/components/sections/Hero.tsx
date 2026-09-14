@@ -12,7 +12,7 @@ export function Hero() {
       {/* One motion moment: the hero image eases in on load. Everything after
           this stays static. Reduced-motion disables the animation globally. */}
       <img
-        src="/assets/Hero.jpg"
+        src={`${import.meta.env.BASE_URL}assets/Hero.jpg`}
         alt=""
         aria-hidden="true"
         loading="eager"
