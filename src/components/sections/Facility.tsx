@@ -38,7 +38,7 @@ export function Facility() {
 
         <FadeIn className="flex flex-col gap-4">
           <img
-            src="/assets/Facility.jpg"
+            src={`${import.meta.env.BASE_URL}assets/Facility.jpg`}
             alt="The correction bay under working light — a clean, climate-controlled studio with LED panel lighting, organized tool cart, and a vehicle positioned for detailing."
             loading="lazy"
             className="aspect-[4/3] w-full border border-border object-cover"
