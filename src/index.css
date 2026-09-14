@@ -1,0 +1,238 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   shadcn-style token surface (dark-only). Primitive components read these,
+   so theming stays in one file. Colors per brand brief:
+     onyx      #0B0B0D  primary background
+     graphite  #4A4E58  structure (borders, dividers, card surfaces)
+     emerald   #0F3D3E  functional (hover, active form, icons)
+     gold      #B08D57  highlight, sparing (<8%)
+   --background is onyx; --muted is the lifted near-black #111318.
+   Gunmetal is deliberately NOT used for text: on onyx it fails contrast.
+   Body copy uses --muted-foreground (light grey, ~7:1 on onyx).
+--------------------------------------------------------------------------- */
+
+:root {
+  --background: #0b0b0d;
+  --foreground: #e9e7e2;
+  --card: #111318;
+  --card-foreground: #e9e7e2;
+  --popover: #111318;
+  --popover-foreground: #e9e7e2;
+  --primary: #0f3d3e;
+  --primary-foreground: #e9e7e2;
+  --secondary: #1a1d22;
+  --secondary-foreground: #c9cbd1;
+  --muted: #111318;
+  --muted-foreground: #9ba0a8;
+  --accent: #1a1d22;
+  --accent-foreground: #e9e7e2;
+  --destructive: #8a2f2f;
+  --destructive-foreground: #e9e7e2;
+  --border: #34373e;
+  --input: #34373e;
+  --ring: #b08d57;
+
+  --graphite: #4a4e58;
+  --gold: #b08d57;
+  --gold-soft: rgba(176, 141, 87, 0.16);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-graphite: var(--graphite);
+  --color-gold: var(--gold);
+
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Switzer', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 26rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem; /* room for the fixed nav on anchor jumps */
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fraunces at its sharp editorial cut: high optical size, low softness. */
+  .font-display,
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings:
+      'opsz' 144,
+      'SOFT' 0,
+      'WONK' 1;
+    font-weight: 360;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+  }
+
+  p {
+    max-width: 68ch;
+  }
+
+  ::selection {
+    background: var(--gold-soft);
+    color: var(--gold);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+   One deliberate moment (hero ease-in) on load; marquee via CSS loop.
+   Everything else stays static. Reduced-motion flips both off.
+--------------------------------------------------------------------------- */
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Viewport fade-in (JS-toggled via useInView hook).
+   Elements start invisible, fade + lift once when they enter the viewport.
+   Stagger via CSS custom property --i on siblings.
+--------------------------------------------------------------------------- */
+
+.animate-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------------------
+   Placeholder image slots
+   Muted gunmetal blocks, exact aspect/crop for each slot. Real photos drop
+   in with no layout change — no AI-generated car imagery per brand brief.
+--------------------------------------------------------------------------- */
+
+.media-slot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #131519 0,
+      #131519 12px,
+      #17191d 12px,
+      #17191d 24px
+    ),
+    #14161a;
+  isolation: isolate;
+}
+
+/* Caption strip only where one is actually given (Gallery comparator layers
+   deliberately carry none). */
+.media-slot[data-caption]:not([data-caption=""])::after {
+  content: attr(data-caption);
+  position: absolute;
+  z-index: 1;
+  inset: auto 0 0 0;
+  margin: 0;
+  padding: 0.45rem 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  line-height: 1.4;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--graphite);
+  background: rgba(11, 11, 13, 0.72);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(2px);
+}
+
+/* Diameter marker centered in empty slots — suggests the subject, never fakes it */
+.media-slot::before {
+  content: '';
+  position: absolute;
+  width: min(70%, 340px);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  border: 1px solid rgba(74, 78, 88, 0.5);
+  opacity: 0.6;
+}
