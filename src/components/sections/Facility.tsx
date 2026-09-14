@@ -1,4 +1,4 @@
-mport { FadeIn } from "@/components/FadeIn";
+import { FadeIn } from "@/components/FadeIn";
 
 const points = [
   "A single bay, climate controlled, dust- and humidity-monitored.",
