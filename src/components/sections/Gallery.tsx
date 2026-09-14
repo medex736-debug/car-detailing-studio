@@ -50,7 +50,7 @@ const work: WorkItem[] = [
     title: "Ceramic coating, metallic grey",
     beforeNote: "Before — uncoated, water pooling",
     afterNote: "After — two-year coating, water sheeting",
-    beforeSrc: `${import.meta.env.BASE_URL}assets/Pair3_before.jpg`,
+    beforeSrc: `${import.meta.env.BASE_URL}assets/pair3_before.jpg`,
     afterSrc: `${import.meta.env.BASE_URL}assets/pair3_after.jpg`,
     beforeAlt: "Untreated paint surface with water pooling flat and spreading",
     afterAlt: "Same panel after ceramic coating — water beading tightly and sheeting off",
