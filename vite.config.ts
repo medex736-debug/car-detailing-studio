@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/car-detailing-studio/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
