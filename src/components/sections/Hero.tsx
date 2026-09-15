@@ -1,4 +1,4 @@
-mport { ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
