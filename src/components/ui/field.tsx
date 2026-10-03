@@ -9,7 +9,7 @@ function Label({
   return (
     <label
       className={cn(
-        "text-sm font-medium text-foreground leading-6",
+        "block text-sm font-medium text-foreground leading-6",
         className
       )}
       {...props}
@@ -25,7 +25,7 @@ const Input = React.forwardRef<
     type={type}
     ref={ref}
     className={cn(
-      "flex h-11 w-full rounded-lg border border-input bg-background px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors",
+      "flex min-h-[44px] h-11 w-full max-w-full rounded-lg border border-input bg-background px-3.5 py-2 text-base sm:text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors [color-scheme:dark]",
       "focus-visible:outline-none focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
       className
@@ -42,7 +42,7 @@ const Textarea = React.forwardRef<
   <textarea
     ref={ref}
     className={cn(
-      "flex min-h-24 w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors",
+      "flex min-h-24 w-full max-w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-base sm:text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors [color-scheme:dark]",
       "focus-visible:outline-none focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
       className

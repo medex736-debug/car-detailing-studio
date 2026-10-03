@@ -53,7 +53,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="underline-offset-4 hover:text-foreground"
+                  className="inline-flex min-h-[44px] items-center underline-offset-4 hover:text-foreground"
                 >
                   {site.phone}
                 </a>
@@ -61,7 +61,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="underline-offset-4 hover:text-foreground"
+                  className="inline-flex min-h-[44px] items-center break-all underline-offset-4 hover:text-foreground"
                 >
                   {site.email}
                 </a>

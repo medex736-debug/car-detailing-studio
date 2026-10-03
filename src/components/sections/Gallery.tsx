@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { assetUrl } from "@/lib/assets";
 import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/FadeIn";
 
@@ -95,7 +96,8 @@ function BeforeAfterSlider({
   return (
     <div
       ref={containerRef}
-      className="relative aspect-[4/3] w-full overflow-hidden border border-border select-none"
+      className="relative aspect-[4/3] w-full max-w-full overflow-hidden border border-border select-none"
+      style={{ touchAction: "pan-y" }}
       onPointerDown={(e) => {
         dragging.current = true;
         e.currentTarget.setPointerCapture(e.pointerId);
@@ -113,7 +115,7 @@ function BeforeAfterSlider({
     >
       {/* After (base layer) */}
       <img
-        src={afterSrc}
+        src={assetUrl(afterSrc)}
         alt={afterAlt}
         className="absolute inset-0 h-full w-full object-cover"
         aria-hidden="true"
@@ -121,7 +123,7 @@ function BeforeAfterSlider({
 
       {/* Before (clipped to the left of the divider) */}
       <img
-        src={beforeSrc}
+        src={assetUrl(beforeSrc)}
         alt={beforeAlt}
         className="absolute inset-0 h-full w-full object-cover"
         aria-hidden="true"
@@ -129,10 +131,10 @@ function BeforeAfterSlider({
       />
 
       {/* Corner labels */}
-      <span className="absolute left-3 top-3 bg-background/80 px-2 py-0.5 text-[0.7rem] uppercase tracking-wider text-muted-foreground">
+      <span className="absolute left-3 top-3 max-w-[45%] bg-background/80 px-2 py-0.5 text-[0.6rem] leading-tight uppercase tracking-wider text-muted-foreground sm:text-[0.7rem]">
         {beforeNote}
       </span>
-      <span className="absolute right-3 top-3 bg-background/80 px-2 py-0.5 text-[0.7rem] uppercase tracking-wider text-muted-foreground">
+      <span className="absolute right-3 top-3 max-w-[45%] bg-background/80 px-2 py-0.5 text-right text-[0.6rem] leading-tight uppercase tracking-wider text-muted-foreground sm:text-[0.7rem]">
         {afterNote}
       </span>
 
@@ -159,7 +161,7 @@ function BeforeAfterSlider({
             setPos((p) => Math.min(100, p + 3));
           }
         }}
-        className="absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-gold bg-background text-gold"
+        className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize touch-none items-center justify-center rounded-full border border-gold bg-background text-gold"
         style={{ left: `${pos}%` }}
       >
         <ChevronLeft className="h-4 w-4" aria-hidden="true" />
@@ -194,7 +196,7 @@ export function Gallery() {
               aria-pressed={active === f.id}
               onClick={() => setActive(f.id)}
               className={cn(
-                "rounded-full border px-4 py-1.5 text-sm transition-colors",
+                "min-h-[40px] rounded-full border px-4 py-2 text-sm transition-colors touch-manipulation",
                 active === f.id
                   ? "border-primary bg-primary/20 text-foreground"
                   : "border-border text-muted-foreground hover:border-muted-foreground/50 hover:text-foreground"

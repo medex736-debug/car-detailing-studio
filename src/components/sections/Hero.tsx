@@ -1,5 +1,6 @@
 import { ArrowDown } from "lucide-react";
 
+import { assetUrl } from "@/lib/assets";
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
 
@@ -12,7 +13,7 @@ export function Hero() {
       {/* One motion moment: the hero image eases in on load. Everything after
           this stays static. Reduced-motion disables the animation globally. */}
       <img
-        src="/assets/Hero.jpg"
+        src={assetUrl("/assets/Hero.jpg")}
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -33,19 +34,19 @@ export function Hero() {
           aria-hidden="true"
         />
 
-        <h1 className="max-w-3xl text-[clamp(2.4rem,6vw,4.4rem)] text-foreground">
+        <h1 className="max-w-3xl break-words text-[clamp(1.85rem,7vw,4.4rem)] text-foreground">
           Paint correction and ceramic protection for cars that show every
           mark.
         </h1>
 
-        <p className="mt-7 max-w-xl text-lg text-muted-foreground">
+        <p className="mt-5 max-w-xl text-base text-muted-foreground sm:mt-7 sm:text-lg">
           Single-slot detailing. Paint depth measured before and after each
           pass, interiors steamed rather than sprayed, and a protection
           schedule built to outlast the season. Booked by appointment,
           finished on time.
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
           <Button asChild size="lg">
             <a href="#booking">Book a detail</a>
           </Button>
@@ -56,7 +57,7 @@ export function Hero() {
           </Button>
         </div>
 
-        <dl className="mt-16 grid max-w-lg grid-cols-2 gap-6 border-t border-border pt-6 text-sm">
+        <dl className="mt-12 grid max-w-lg grid-cols-1 gap-4 border-t border-border pt-6 text-sm sm:mt-16 sm:grid-cols-2 sm:gap-6">
           <div>
             <dt className="font-medium text-foreground">Location</dt>
             <dd className="mt-1 text-muted-foreground">

@@ -47,7 +47,7 @@ export function Nav() {
       >
         <a
           href="#top"
-          className="flex flex-col items-center gap-1.5"
+          className="flex min-h-[44px] flex-col items-center justify-center gap-1.5"
           aria-label={`${site.name} — back to top`}
         >
           <span className="text-base font-medium leading-none text-foreground">
@@ -65,7 +65,7 @@ export function Nav() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex min-h-[44px] items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -74,7 +74,7 @@ export function Nav() {
         </ul>
 
         <div className="hidden md:block">
-          <Button asChild variant="outline" size="sm">
+          <Button asChild variant="outline" size="sm" className="min-h-[44px] px-4 text-sm">
             <a href="#booking">Book a detail</a>
           </Button>
         </div>
@@ -82,13 +82,13 @@ export function Nav() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center text-foreground md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-foreground transition-colors hover:text-gold md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
 
@@ -96,21 +96,21 @@ export function Nav() {
       {open && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 bottom-0 top-16 z-40 bg-background px-6 pb-10 pt-6 md:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-background px-6 pb-10 pt-6 md:hidden"
         >
-          <ul className="flex flex-col gap-6">
+          <ul className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="font-display text-3xl text-foreground"
+                  className="flex min-h-[48px] items-center font-display text-2xl text-foreground transition-colors hover:text-gold sm:text-3xl"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
-            <li className="pt-4">
+            <li className="pt-6">
               <Button asChild className="w-full">
                 <a href="#booking" onClick={() => setOpen(false)}>
                   Book a detail

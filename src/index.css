@@ -75,6 +75,8 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem; /* room for the fixed nav on anchor jumps */
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
@@ -86,6 +88,8 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   /* Fraunces at its sharp editorial cut: high optical size, low softness. */
@@ -105,6 +109,12 @@
 
   p {
     max-width: 68ch;
+  }
+
+  input,
+  select,
+  textarea {
+    color-scheme: dark;
   }
 
   ::selection {
@@ -148,11 +158,36 @@
   animation: marquee 42s linear infinite;
 }
 
+/* Gentle expanding halo for the floating WhatsApp button — a soft ring that
+   fades out as it grows, not a blink. */
+@keyframes wa-glow {
+  0% {
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.38),
+      0 0 0 0 rgba(37, 211, 102, 0.45);
+  }
+  70% {
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.38),
+      0 0 0 14px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.38),
+      0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.wa-glow {
+  animation: wa-glow 2.8s ease-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .marquee-track {
+  .marquee-track,
+  .wa-glow {
     animation: none;
   }
   *,

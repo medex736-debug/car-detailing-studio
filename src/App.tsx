@@ -12,6 +12,7 @@ import { Process } from "@/components/sections/Process";
 import { Reviews } from "@/components/sections/Reviews";
 import { Services } from "@/components/sections/Services";
 import { StickyCTA } from "@/components/sections/StickyCTA";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import type { PricingPlan } from "@/components/ui/pricing-module";
 import { services } from "@/data/services";
 
@@ -41,6 +42,7 @@ function App() {
 
       <Nav />
       <StickyCTA />
+      <WhatsAppButton />
 
       <main>
         <Hero />

@@ -75,11 +75,11 @@ export function PricingModule({
       )}
     >
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold tracking-tight mb-2">{title}</h2>
-        <p className="text-muted-foreground mb-8">{subtitle}</p>
+        <h2 className="text-3xl font-bold tracking-tight mb-2 sm:text-4xl">{title}</h2>
+        <p className="mx-auto text-muted-foreground mb-8 max-w-2xl text-sm sm:text-base">{subtitle}</p>
 
         {/* Vehicle-size toggle: a studio prices by vehicle, not by month. */}
-        <div className="flex items-center justify-center gap-3 mb-10">
+        <div className="flex min-h-[44px] items-center justify-center gap-3 mb-10">
           <span
             className={cn(
               "text-sm transition-colors",
@@ -106,30 +106,30 @@ export function PricingModule({
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+        <div className="mx-auto grid max-w-full grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan, i) => (
-            <FadeIn key={plan.id} i={i}>
+            <FadeIn key={plan.id} i={i} className="min-w-0">
             <Card
               className={cn(
-                "relative border border-muted rounded-xl transition-colors",
+                "relative h-full rounded-xl border border-muted transition-colors",
                 plan.recommended &&
                   "border-primary ring-1 ring-primary/40 bg-muted"
               )}
             >
               {plan.recommended && (
-                <div className="absolute -top-3 left-0 right-0 mx-auto w-fit border border-gold bg-background text-gold text-xs px-3 py-1 rounded-full">
+                <div className="absolute -top-3 left-0 right-0 mx-auto w-fit max-w-[calc(100%-2rem)] whitespace-nowrap overflow-hidden text-ellipsis border border-gold bg-background text-gold text-xs px-3 py-1 rounded-full">
                   {plan.recommendedLabel ?? "Recommended"}
                 </div>
               )}
 
               <CardHeader className="pt-8 pb-2">
                 <div className="flex justify-center mb-4">{plan.icon}</div>
-                <CardTitle>{plan.name}</CardTitle>
+                <CardTitle className="text-xl leading-tight sm:text-2xl">{plan.name}</CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
               </CardHeader>
 
               <CardContent className="text-center">
-                <div className="text-[2.6rem] leading-none font-display mb-2">
+                <div className="text-[2.2rem] leading-none font-display mb-2 sm:text-[2.6rem]">
                   ${isSuv ? plan.priceSuv : plan.priceSedan}
                 </div>
                 <p className="text-xs uppercase tracking-wider text-muted-foreground mb-6">

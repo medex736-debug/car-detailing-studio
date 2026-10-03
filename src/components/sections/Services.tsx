@@ -39,7 +39,7 @@ export function Services() {
                 <span className="text-graphite">{service.duration}</span>
                 <a
                   href="#pricing"
-                  className="inline-flex items-center gap-1.5 font-medium text-foreground underline-offset-4 transition-colors hover:text-gold"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 font-medium text-foreground underline-offset-4 transition-colors hover:text-gold"
                 >
                   Pricing
                   <ArrowRight

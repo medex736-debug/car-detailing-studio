@@ -12,7 +12,7 @@ const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
   <AriaSwitch
     className={composeRenderProps(className, (className) =>
       cn(
-        "group inline-flex items-center gap-2 text-sm font-medium leading-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-70",
+        "group inline-flex min-h-[44px] items-center gap-2 text-sm font-medium leading-none touch-manipulation select-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-70",
         className
       )
     )}
