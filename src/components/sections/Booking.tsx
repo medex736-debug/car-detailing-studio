@@ -11,8 +11,8 @@ import { site } from "@/data/site";
 /**
  * WhatsApp number that receives booking requests.
  * Must be in international format, digits only, no "+", spaces or dashes.
+ * Single source of truth: `site.whatsapp` in `src/data/site.ts`.
  */
-const WHATSAPP_NUMBER = "213776739184";
 
 /**
  * English service name -> Arabic translation used ONLY inside the WhatsApp
@@ -71,7 +71,7 @@ function buildWhatsAppLink(payload: {
     `الاسم: ${payload.name}\n\n` +
     `(بانتظار تأكيدكم للموعد)`;
 
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
 export function Booking({ preferredService }: BookingProps) {

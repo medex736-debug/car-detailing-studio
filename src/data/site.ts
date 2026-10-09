@@ -8,6 +8,8 @@ export const site = {
   year: "2018",
   phone: "+1 (555) 010-8200",
   email: "studio@example.com",
+  whatsapp: "213776739184",
+  currency: "$",
   address: {
     line1: "Unit 4, 12 Atlas Road",
     line2: "North Park Industrial Estate",

@@ -17,10 +17,9 @@ Work top to bottom; each step names the exact file to open.
 1. **Business details** — `src/data/site.ts`: name, tagline, year, phone,
    email, address, hours, service area. (No social links field exists yet —
    see ⚠️.)
-2. **WhatsApp number** — change it in **both** places (they are not linked):
-   - `src/components/sections/Booking.tsx` → `WHATSAPP_NUMBER`
-   - `src/components/WhatsAppButton.tsx` → `WHATSAPP_NUMBER`
-   - Keep digits-only international format (no `+`, spaces or dashes).
+2. **WhatsApp number** — `src/data/site.ts` → `whatsapp`. One field, used by
+   both the booking form and the floating button.
+   Keep digits-only international format (no `+`, spaces or dashes).
 3. **Booking WhatsApp message** — `src/components/sections/Booking.tsx` →
    `SERVICE_NAME_AR` (Arabic service names) and `TIME_SLOTS`. Keys must match
    the `name` values in `src/data/services.ts`.
@@ -66,15 +65,15 @@ Work top to bottom; each step names the exact file to open.
 | `address.postal` | `"MP1 2PE"` | Footer → Visit |
 | `hours[]` | 4 entries `{ days, time }` | Footer → Hours (mapped) |
 | `serviceArea` | `"Mobile collection and delivery available within 40 km…"` | Footer, Hero "Service area" |
+| `whatsapp` | `"213776739184"` | Booking form submit link and floating WhatsApp button (`https://wa.me/<number>?text=…`) |
+| `currency` | `"$"` | Currency symbol before every price in `src/components/ui/pricing-module.tsx` |
 
 Consumed by: `src/components/sections/Nav.tsx`, `Hero.tsx`, `Footer.tsx`,
-`Booking.tsx`.
+`Booking.tsx`, `WhatsAppButton.tsx`, `ui/pricing-module.tsx`.
 
 **Not present (must be added if the client needs them):**
 - **Social links** — no Instagram/Facebook/YouTube fields anywhere; the
   footer has only Visit / Hours / Contact columns.
-- **WhatsApp number** — deliberately *not* in `site.ts` (it lives inside two
-  components; see section 6).
 - **Logo image path** — the "logo" is the `site.name` text with a gold rule
   under it (`Nav.tsx`, `Footer.tsx`).
 
@@ -120,9 +119,10 @@ Used in: Services cards (`Services.tsx`) and the booking form dropdown
 4 tiers: `exterior`, `interior`, `paint-correction`, `signature`
 (the recommended one).
 
-**Currency:** the `$` sign is **hardcoded** in
-`src/components/ui/pricing-module.tsx` line 133 — there is no currency field
-in the data file. See ⚠️.
+**Currency:** the symbol comes from `site.currency` (`src/data/site.ts`),
+rendered in `src/components/ui/pricing-module.tsx` line ~133. Change the field
+to reprice the whole site; the `"sedan detail"` label on the same screen is
+still literal copy.
 
 **Vehicle toggle:** the Sedan/SUV switch is built into the pricing module;
 `SUV` label is the `suvLabel` prop (default `"SUV"`), passed from
@@ -259,25 +259,23 @@ at the same pixel geometry. Recommended ≥1408×768 landscape.
 - **No team/staff/about photos anywhere.**
 - **Testimonials have no photos.**
 
-**Unused folder:** `images/` at the project root (`hero-bg.jpg`,
-`workshop.jpg`, `service-*.jpg`, `lounge-*.jpg`, `testimonial-owner.jpg`,
-`before-after.jpg` — 11 files) is **referenced nowhere** in the codebase. It is
-dead weight; delete it or wire it up deliberately (⚠️).
+**Unused folder:** the old root `images/` folder (11 files, referenced nowhere)
+has been deleted — do not reintroduce it. All live images belong in
+`public/assets/`.
 
 ---
 
 ## 6. WhatsApp Integration
 
-**The number is NOT a single source of truth — it is defined twice.**
-Both must be updated together:
+**The number lives in one place: `site.whatsapp` (`src/data/site.ts`).**
 
-| # | File | Constant | Used for |
+| # | Consumer | Constant / field | Used for |
 |---|---|---|---|
-| 1 | `src/components/sections/Booking.tsx` (line ~15) | `WHATSAPP_NUMBER = "213776739184"` | Booking form submit → `buildWhatsAppLink()` → `https://wa.me/<number>?text=<Arabic booking message>` opened in a new tab |
-| 2 | `src/components/WhatsAppButton.tsx` (line ~16) | `WHATSAPP_NUMBER = "213776739184"` | Floating green button → `https://wa.me/<number>?text=<generic Arabic greeting>` |
+| 1 | `src/components/sections/Booking.tsx` (`buildWhatsAppLink`) | `site.whatsapp` | Booking form submit → `https://wa.me/<number>?text=<Arabic booking message>` opened in a new tab |
+| 2 | `src/components/WhatsAppButton.tsx` (`WHATSAPP_URL`) | `site.whatsapp` | Floating green button → `https://wa.me/<number>?text=<generic Arabic greeting>` |
 
-Format requirement (documented in `Booking.tsx`): international, digits only,
-no `+`, spaces or dashes.
+Format requirement (documented in `site.ts` / `Booking.tsx`): international,
+digits only, no `+`, spaces or dashes.
 
 **Message payloads (different on purpose — do not conflate):**
 
@@ -304,8 +302,8 @@ no `+`, spaces or dashes.
   in sync.
 - `TIME_SLOTS` — 9:00 AM → 6:00 PM, displayed in English in the UI.
 
-**Do not add the number anywhere else** (footer, CTA bars, etc.) without
-consolidating it into `site.ts` first — see ⚠️.
+**Do not add the number anywhere else** (footer, CTA bars, etc.) — read it from
+`site.whatsapp` so it stays a single source of truth.
 
 ---
 
@@ -315,25 +313,19 @@ Hardcoded client-specific values that live in component/config code rather
 than a data file. Fix these before treating the repo as a clean reusable
 template.
 
-1. **WhatsApp number duplicated** — `Booking.tsx` and `WhatsAppButton.tsx`
-   each declare `WHATSAPP_NUMBER`. Should become one field (e.g.
-   `site.whatsapp`) imported by both.
-2. **Arabic service map inside the form component** — `SERVICE_NAME_AR` in
+1. **Arabic service map inside the form component** — `SERVICE_NAME_AR` in
    `Booking.tsx` must track `services.ts` names; a rename in the data file
    silently breaks translations. Move alongside `services.ts` or key by `id`.
-3. **Pricing → service id mapping in `App.tsx`** — `serviceByPlan` breaks the
+2. **Pricing → service id mapping in `App.tsx`** — `serviceByPlan` breaks the
    "Book this slot" preselect if any `id` is renamed in `pricing.tsx` /
    `services.ts`.
-4. **Currency symbol hardcoded** — `$` is baked into
-   `src/components/ui/pricing-module.tsx` (line ~133), plus the literal copy
-   `"sedan detail"` on the same screen. No currency field exists.
-5. **SEO/meta not driven by data** — `index.html` `<title>`
+3. **SEO/meta not driven by data** — `index.html` `<title>`
    ("Studio Detail — Precision car care"), meta description and
    `theme-color` must be edited manually per client.
-6. **Deployment base path hardcoded** — `vite.config.ts` →
+4. **Deployment base path hardcoded** — `vite.config.ts` →
    `base: '/car-detailing-studio/'` must equal the GitHub repo name; forgetting
    this 404s every image and asset on Pages.
-7. **Marketing copy lives in components**, not data files. Editing content
+5. **Marketing copy lives in components**, not data files. Editing content
    means touching JSX:
    - `Hero.tsx` — headline, paragraph, button labels
    - `Services.tsx` — section heading + intro
@@ -345,6 +337,9 @@ template.
      `TIME_SLOTS`
    - `Reviews.tsx` — section heading
    - `Pricing.tsx` — subtitle and footnote paragraph
+   - `pricing-module.tsx` — vehicle captions, notably the literal
+     `"sedan detail"` / `` `${suvLabel} detail` `` under each price (the price
+     symbol itself is `site.currency`)
    - `Footer.tsx` — column titles (Visit/Hours/Contact) and tagline sentence
    - `Nav.tsx` — `navLinks` labels and their hrefs. Current links are
      Services / Process / Work / Pricing / Reviews → `#services #process
@@ -354,15 +349,12 @@ template.
      #facility #pricing #reviews #booking` — note `#facility` currently has
      **no link pointing to it**. If you delete or rename a section, update
      `navLinks`/CTAs or the links scroll nowhere.
-8. **Section band color repeated** — `#0d0d10` hardcoded in `Marque.tsx`,
+6. **Section band color repeated** — `#0d0d10` hardcoded in `Marque.tsx`,
    `Process.tsx`, `Facility.tsx`, `Reviews.tsx`; make it a theme token.
-9. **Dead data / dead assets** — `site.year` is never rendered;
-   `testimonials.ts` has no rating field; the root `images/` folder (11
-   files) is referenced nowhere.
-10. **No social links support** — adding client socials requires new fields in
-    `site.ts` plus footer markup.
-11. **README is the stock Vite template** — replace with project-specific
-    onboarding docs.
+7. **Dead data** — `site.year` is never rendered; `testimonials.ts` has no
+   rating field.
+8. **No social links support** — adding client socials requires new fields in
+   `site.ts` plus footer markup.
 
 ---
 

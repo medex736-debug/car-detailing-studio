@@ -1,32 +1,26 @@
-# React + TypeScript + Vite
+# Car Detailing Studio — Website Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A single-page React + TypeScript + Vite template for car detailing studios:
+hero, services, process, before/after gallery, facility, pricing, testimonials
+and a WhatsApp booking form, with a floating WhatsApp contact button.
 
-Currently, two official plugins are available:
+Built with React 19, Vite, Tailwind CSS v4 and Radix-based UI primitives.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Commands
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install     # install dependencies
+npm run dev     # start the dev server
+npm run build   # type-check and build for production
+npm run lint    # run oxlint
+npm run preview # preview the production build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Getting started
+
+All business details (name, phone, email, address, hours, WhatsApp number,
+currency) live in `src/data/site.ts`. Services, pricing, testimonials and
+marquee brands live in `src/data/`.
+
+See **[CUSTOMIZATION.md](./CUSTOMIZATION.md)** for the full step-by-step guide
+to rebranding the template for a new client.

@@ -13,6 +13,7 @@ import { Switch } from "@/components/ui/switch";
 import { FadeIn } from "@/components/FadeIn";
 import { Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { site } from "@/data/site";
 
 export interface PlanFeature {
   label: string;
@@ -130,7 +131,7 @@ export function PricingModule({
 
               <CardContent className="text-center">
                 <div className="text-[2.2rem] leading-none font-display mb-2 sm:text-[2.6rem]">
-                  ${isSuv ? plan.priceSuv : plan.priceSedan}
+                  {site.currency}{isSuv ? plan.priceSuv : plan.priceSedan}
                 </div>
                 <p className="text-xs uppercase tracking-wider text-muted-foreground mb-6">
                   {isSuv ? `${suvLabel} detail` : "sedan detail"}

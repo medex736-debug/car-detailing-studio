@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { site } from "@/data/site";
+
 /**
  * Floating WhatsApp contact button (site-wide, additive only).
  *
@@ -13,10 +15,9 @@ import { useEffect, useState } from "react";
  * over that overlay.
  */
 
-const WHATSAPP_NUMBER = "213776739184";
 const GREETING = "مرحباً، أرغب بالاستفسار عن خدماتكم";
 
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(GREETING)}`;
+const WHATSAPP_URL = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(GREETING)}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
