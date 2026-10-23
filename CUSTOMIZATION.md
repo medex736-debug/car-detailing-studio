@@ -283,7 +283,7 @@ digits only, no `+`, spaces or dashes.
   plus `SERVICE_NAME_AR` translations:
   ```
   مرحباً، أرغب بطلب موعد:
-  الخخدمة: <Arabic service name>
+  الخدمة: <Arabic service name>
   التاريخ المفضل: <date>
   الوقت المفضل: <time>
   الاسم: <name>
