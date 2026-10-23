@@ -1,38 +1,26 @@
 export interface Testimonial {
   name: string;
-  city: string;
-  vehicle: string;
-  service: string;
+  city?: string;
+  vehicle?: string;
+  service?: string;
   quote: string;
 }
 
 /**
- * Placeholder testimonials.
- * TODO: replace with real client reviews.
+ * Real Google reviews.
  */
 export const testimonials: Testimonial[] = [
   {
-    name: "Marcus Hale",
-    city: "Northbridge",
-    vehicle: "Porsche 911 Carrera",
-    service: "Paint correction",
+    name: "Mirela David",
     quote:
-      "The swirls never came back after a hand wash. Eleven months on, the panels still look like the morning they were finished.",
+      "I love this car wash, they are fast and good price. Also upstairs have room prayer, sala with tv for waiting, and toilet. Thank you for the service always. Appreciate a lot.",
   },
   {
-    name: "Priya Nair",
-    city: "Westford",
-    vehicle: "Range Rover Velar",
-    service: "Signature",
-    quote:
-      "They photographed the paint depth before touching it. That level of caution is exactly why I handed over a car I care about.",
+    name: "Md. Paiker",
+    quote: "Amazing service. They made my car like a brand new one",
   },
   {
-    name: "Daniel Osei",
-    city: "Fenwick",
-    vehicle: "Tesla Model Y",
-    service: "Ceramic coating",
-    quote:
-      "Booked a slot, got a slot. Dropped off Monday evening, collected Wednesday lunchtime. The coating survives automatic washes without a swirl.",
+    name: "Arun Vasu",
+    quote: "Best car detailing services in RAK.",
   },
 ];

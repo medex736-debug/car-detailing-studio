@@ -1,4 +1,5 @@
 import { site } from "@/data/site";
+import { assetUrl } from "@/lib/assets";
 
 export function Footer() {
   return (
@@ -8,9 +9,22 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <p className="text-base font-medium text-foreground">
-              {site.name}
-            </p>
+            <a
+              href="#top"
+              className="inline-flex items-center gap-2.5"
+              aria-label={`${site.name} — back to top`}
+            >
+              <div className="rounded-lg bg-white p-1">
+                <img
+                  src={assetUrl("assets/logo.jpg")}
+                  alt={site.name}
+                  className="h-8 w-auto object-contain"
+                />
+              </div>
+              <span className="text-base font-medium text-foreground">
+                {site.name}
+              </span>
+            </a>
             <span
               className="mt-2 block h-px w-10 bg-gold"
               aria-hidden="true"
@@ -28,6 +42,16 @@ export function Footer() {
               <li>{site.address.line2}</li>
               <li>
                 {site.address.city}, {site.address.postal}
+              </li>
+              <li className="pt-2">
+                <a
+                  href="https://maps.app.goo.gl/Lv9gTkUjPWXfRgD56"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+                >
+                  View on Google Maps ↗
+                </a>
               </li>
             </ul>
             <p className="mt-4 text-xs leading-relaxed text-graphite">

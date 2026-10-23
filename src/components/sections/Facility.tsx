@@ -12,7 +12,7 @@ export function Facility() {
   return (
     <section
       id="facility"
-      className="border-y border-border bg-[#0d0d10] py-24"
+      className="border-y border-border bg-[var(--section-bg)] py-24"
     >
       <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:px-8 lg:gap-16">
         <div>
