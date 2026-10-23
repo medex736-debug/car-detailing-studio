@@ -5,7 +5,7 @@ export function Reviews() {
   return (
     <section
       id="reviews"
-      className="border-y border-border bg-[#0d0d10] py-24"
+      className="border-y border-border bg-[var(--section-bg)] py-24"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <FadeIn className="max-w-2xl">
@@ -26,11 +26,13 @@ export function Reviews() {
               </blockquote>
               <figcaption className="mt-6 border-t border-border pt-4 text-sm">
                 <p className="font-medium text-foreground">
-                  {t.name} <span className="text-graphite">· {t.city}</span>
+                  {t.name} {t.city && <span className="text-graphite">· {t.city}</span>}
                 </p>
-                <p className="mt-1 text-muted-foreground">
-                  {t.vehicle} — {t.service}
-                </p>
+                {(t.vehicle || t.service) && (
+                  <p className="mt-1 text-muted-foreground">
+                    {[t.vehicle, t.service].filter(Boolean).join(" — ")}
+                  </p>
+                )}
               </figcaption>
             </figure>
           ))}

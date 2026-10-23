@@ -6,7 +6,7 @@ export function Marque() {
   return (
     <section
       aria-label="Vehicles the studio services regularly"
-      className="relative overflow-hidden border-y border-border bg-[#0d0d10] py-10"
+      className="relative overflow-hidden border-y border-border bg-[var(--section-bg)] py-10"
     >
       {/* Edge masks so the row fades instead of clipping hard */}
       <div

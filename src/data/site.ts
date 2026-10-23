@@ -3,17 +3,17 @@
  * TODO: replace every value below with the studio's real details.
  */
 export const site = {
-  name: "Studio Detail",
-  nameTagline: "Precision car care",
+  name: "Profection Car Wash",
+  nameTagline: "Profection",
   year: "2018",
-  phone: "+1 (555) 010-8200",
+  phone: "509518818",
   email: "studio@example.com",
-  whatsapp: "213776739184",
+  whatsapp: "971509518818",
   currency: "$",
   address: {
-    line1: "Unit 4, 12 Atlas Road",
+    line1: "PWR2+M5 Ras Al-Khaimah, Ras Al Khaimah - United Arab Emirates",
     line2: "North Park Industrial Estate",
-    city: "Metropolis",
+    city: "Ras Al Khaimah",
     postal: "MP1 2PE",
   },
   hours: [

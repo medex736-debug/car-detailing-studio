@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
+import { assetUrl } from "@/lib/assets";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 
 const navLinks = [
@@ -47,16 +48,19 @@ export function Nav() {
       >
         <a
           href="#top"
-          className="flex min-h-[44px] flex-col items-center justify-center gap-1.5"
+          className="flex min-h-[44px] items-center gap-2.5"
           aria-label={`${site.name} — back to top`}
         >
+          <div className="rounded-lg bg-white p-1">
+            <img
+              src={assetUrl("assets/logo.jpg")}
+              alt={site.name}
+              className="h-8 w-auto object-contain"
+            />
+          </div>
           <span className="text-base font-medium leading-none text-foreground">
             {site.name}
           </span>
-          <span
-            className="block h-px w-full bg-gold"
-            aria-hidden="true"
-          />
         </a>
 
         {/* Desktop links */}

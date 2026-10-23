@@ -25,7 +25,7 @@ export function Process() {
   return (
     <section
       id="process"
-      className="border-y border-border bg-[#0d0d10] py-24"
+      className="border-y border-border bg-[var(--section-bg)] py-24"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="max-w-2xl">
@@ -40,7 +40,7 @@ export function Process() {
 
         <ol className="mt-14 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-5">
           {steps.map((step, i) => (
-            <li key={step.title} className="bg-[#0d0d10] p-7">
+            <li key={step.title} className="bg-[var(--section-bg)] p-7">
               <span
                 className="font-display text-3xl text-graphite"
                 aria-hidden="true"
