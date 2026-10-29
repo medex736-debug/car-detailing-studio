@@ -21,11 +21,7 @@ import { site } from "@/data/site";
  * its original (English) name so nothing breaks if a name doesn't match.
  */
 const SERVICE_NAME_AR: Record<string, string> = {
-  "Exterior detail": "تفصيل خارجي",
-  "Interior detail": "تفصيل داخلي",
-  "Paint correction": "تصحيح الطلاء",
-  "Ceramic coating": "طلاء سيراميك",
-  "Paint protection film": "فيلم حماية الطلاء",
+  "Paint Protection Film": "فيلم حماية الطلاء",
 };
 
 /** Hourly slots, 9:00 AM -> 6:00 PM. Labels stay in English in the UI. */

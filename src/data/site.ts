@@ -1,20 +1,20 @@
 /**
- * Business details for Profection Car Wash.
- * TODO: email, address.line2, address.postal, hours and serviceArea still hold
- * template placeholder values — they are awaiting the client's real data.
+ * Business details for 974 | The Art Factory.
+ * TODO: the values still holding template placeholders (address.line2/postal,
+ * hours, serviceArea) are awaiting the client's data.
  */
 export const site = {
-  name: "Profection Car Wash",
-  nameTagline: "Profection",
+  name: "974 | The Art Factory",
+  nameTagline: "974 Car Detailing",
   year: "2018",
-  phone: "509518818",
-  email: "studio@example.com",
-  whatsapp: "971509518818",
-  currency: "AED ",
+  phone: "05997 7781",
+  email: "Hello@974cardetailing.com",
+  whatsapp: "97459977781",
+  currency: "QAR ",
   address: {
-    line1: "PWR2+M5 Ras Al-Khaimah, Ras Al Khaimah - United Arab Emirates",
+    line1: "ARS022 , Industrial Area Rd./Doha , Qatar",
     line2: "North Park Industrial Estate",
-    city: "Ras Al Khaimah",
+    city: "ARS022 , Industrial Area Rd.",
     postal: "MP1 2PE",
   },
   hours: [

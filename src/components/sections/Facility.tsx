@@ -20,9 +20,10 @@ export function Facility() {
             The bay is the difference between a detailer and a car wash.
           </h2>
           <p className="mt-5 text-muted-foreground">
-            A two-bucket wash in a car park finishes a car. It cannot finish a
-            correction. Every surface here is engineered for the few hours a
-            year your paint is actually worked on.
+            We’re more than a detailing center — we’re car enthusiasts dedicated
+            to transforming every vehicle into a masterpiece on wheels. Driven
+            by precision and excellence, 974 Car Detailing stands for quality,
+            reliability, and a flawless finish in every service we deliver
           </p>
 
           <ul className="mt-9 space-y-4">

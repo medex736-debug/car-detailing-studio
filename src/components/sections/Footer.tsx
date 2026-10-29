@@ -36,7 +36,7 @@ export function Footer() {
               </li>
               <li className="pt-1">
                 <a
-                  href="https://maps.app.goo.gl/Lv9gTkUjPWXfRgD56"
+                  href="https://maps.app.goo.gl/pX8QSB1VRCdN7ozAA"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
@@ -86,6 +86,28 @@ export function Footer() {
               Slots are held at booking and confirmed within four working
               hours.
             </p>
+            <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+              <li>
+                <a
+                  href="https://www.instagram.com/974cardetailing?igsh=MTVxczRuZXZ4ZDhzag%3D%3D&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.tiktok.com/@974_cardetailing?_t=ZS-90z2wuXkXQY&_r=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
+                >
+                  TikTok
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 

@@ -11,16 +11,21 @@ export interface Testimonial {
  */
 export const testimonials: Testimonial[] = [
   {
-    name: "Mirela David",
+    name: "Abdulrhman Al Darwish",
+    quote: "Great experience and great staff .. reasonable price.",
+  },
+  {
+    name: "Werner Luzny",
     quote:
-      "I love this car wash, they are fast and good price. Also upstairs have room prayer, sala with tv for waiting, and toilet. Thank you for the service always. Appreciate a lot.",
+      "A team of experts with high skills and competencies, they are truly the best!",
   },
   {
-    name: "Md. Paiker",
-    quote: "Amazing service. They made my car like a brand new one",
+    name: "Khaled Shash",
+    quote: "Professional handling\nGreat material\nBest services",
   },
   {
-    name: "Arun Vasu",
-    quote: "Best car detailing services in RAK.",
+    name: "Rogel Gatmaitan",
+    quote:
+      "Best shop ever must experience there service..very professional people and accommodating..2 THUMBS UP",
   },
 ];

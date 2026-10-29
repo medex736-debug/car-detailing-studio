@@ -18,41 +18,41 @@ export interface Service {
 export const services: Service[] = [
   {
     id: "exterior-detail",
-    name: "Exterior detail",
+    name: "Premium Detailing",
     description:
-      "Decontamination wash, fallout removal, and a hand-finished sealant. Paint, glass, wheels, and trim returned to a dry, protected finish.",
+      "Revive your ride inside and out — deep cleaning, engine bay care, and show-car perfection.",
     duration: "4–5 hours",
     icon: Droplets,
   },
   {
     id: "interior-detail",
-    name: "Interior detail",
+    name: "Tinting",
     description:
-      "Steam and fabric extraction, leather cleaning and conditioning, and full trim detailing. No dressing overspray, no lingering fragrance.",
+      "Experience comfort and elegance — premium films that reduce heat, protect interiors, and elevate your car’s appearance.",
     duration: "4–6 hours",
     icon: Armchair,
   },
   {
     id: "paint-correction",
-    name: "Paint correction",
+    name: "Color Full Wrapping",
     description:
-      "Paint-depth measurement before any machine work, then staged compounding and polishing to remove swirls and haze without thinning the clear coat.",
+      "Transform your vehicle into a statement — precision-applied chrome, satin, or matte wraps with striking design and flawless finish.",
     duration: "1–2 days",
     icon: Sparkles,
   },
   {
     id: "ceramic-coating",
-    name: "Ceramic coating",
+    name: "Graphene Coating",
     description:
-      "A multi-layer ceramic body protection applied after correction. Hydrophobic, chemical-resistant, and maintained with six-month inspections.",
+      "The ultimate shield of brilliance — advanced graphene coating that delivers deep gloss, smooth touch, and long-term resistance against the elements.",
     duration: "2–3 days",
     icon: Shield,
   },
   {
     id: "paint-protection-film",
-    name: "Paint protection film",
+    name: "Paint Protection Film",
     description:
-      "Self-healing film over high-impact panels. Applied in a controlled bay, wrapped, not cut on the paint.",
+      "Invisible armor for your paint — defends against scratches, chips, and road damage.\nAvailable in Gloss & Matt.\nXPEL  |  AVERY DENNISON  |  LUMINOUS",
     duration: "2 days",
     icon: Layers,
   },
