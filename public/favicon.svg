@@ -1,6 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#0b0b0d"/>
-  <circle cx="32" cy="32" r="22" fill="none" stroke="#b08d57" stroke-width="1.75"/>
-  <circle cx="32" cy="32" r="10" fill="none" stroke="#0f3d3e" stroke-width="1.5"/>
-  <circle cx="32" cy="32" r="3" fill="#b08d57"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#111111" />
+  <path
+    d="M32 8 51 15v16c0 11-8 19-19 24-11-5-19-13-19-24V15Z"
+    fill="none"
+    stroke="#e9e7e2"
+    stroke-width="3.5"
+    stroke-linejoin="round"
+  />
+  <g>
+    <rect x="24" y="19" width="16" height="2.5" fill="#111111" />
+    <rect x="24" y="21.5" width="16" height="2.5" fill="#d31017" />
+    <rect x="24" y="24" width="16" height="2.5" fill="#ffcc00" />
+  </g>
+  <text
+    x="32"
+    y="47"
+    text-anchor="middle"
+    font-family="Arial Black, Arial, Helvetica, sans-serif"
+    font-size="24"
+    font-weight="800"
+    fill="#ffffff"
+  >
+    974
+  </text>
 </svg>

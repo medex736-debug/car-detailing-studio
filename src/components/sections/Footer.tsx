@@ -1,4 +1,5 @@
 import { site } from "@/data/site";
+import { assetUrl } from "@/lib/assets";
 
 export function Footer() {
   return (
@@ -8,11 +9,15 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <p className="text-base font-medium text-foreground">
-              {site.name}
-            </p>
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1">
+              <img
+                src={assetUrl("assets/logo.png")}
+                alt={site.name}
+                className="h-full w-full rounded-full object-cover"
+              />
+            </span>
             <span
-              className="mt-2 block h-px w-10 bg-gold"
+              className="mt-3 block h-px w-10 bg-gold"
               aria-hidden="true"
             />
             <p className="mt-4 max-w-56 text-sm text-muted-foreground">
@@ -28,6 +33,16 @@ export function Footer() {
               <li>{site.address.line2}</li>
               <li>
                 {site.address.city}, {site.address.postal}
+              </li>
+              <li className="pt-1">
+                <a
+                  href="https://maps.app.goo.gl/Lv9gTkUjPWXfRgD56"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
+                >
+                  View on Google Maps
+                </a>
               </li>
             </ul>
             <p className="mt-4 text-xs leading-relaxed text-graphite">
