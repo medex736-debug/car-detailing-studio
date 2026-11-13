@@ -1,60 +1,55 @@
-import {
-  Armchair,
-  Droplets,
-  Layers,
-  Shield,
-  Sparkles,
-  type LucideIcon,
-} from "lucide-react";
+import { Droplets, Layers, Shield, Sparkles, type LucideIcon } from "lucide-react";
 
 export interface Service {
   id: string;
   name: string;
+  nameEn: string;
   description: string;
-  duration: string;
+  descriptionEn: string;
   icon: LucideIcon;
 }
 
+/**
+ * The four services offered by the client.
+ * Source: CLIENT-BRIEF.md §3 / docs/VERIFIED_FACTS.md.
+ * `duration` was removed — durations were not provided by the client.
+ */
 export const services: Service[] = [
   {
-    id: "exterior-detail",
-    name: "Premium Detailing",
-    description:
-      "Revive your ride inside and out — deep cleaning, engine bay care, and show-car perfection.",
-    duration: "4–5 hours",
+    id: "cleaning",
+    name: "تنظيف",
+    nameEn: "Cleaning",
+    description: "تنظيف شامل للسيارة من الداخل والخارج",
+    descriptionEn: "Comprehensive cleaning of the car inside and out",
     icon: Droplets,
   },
   {
-    id: "interior-detail",
-    name: "Tinting",
-    description:
-      "Experience comfort and elegance — premium films that reduce heat, protect interiors, and elevate your car’s appearance.",
-    duration: "4–6 hours",
-    icon: Armchair,
-  },
-  {
-    id: "paint-correction",
-    name: "Color Full Wrapping",
-    description:
-      "Transform your vehicle into a statement — precision-applied chrome, satin, or matte wraps with striking design and flawless finish.",
-    duration: "1–2 days",
+    id: "polishing",
+    name: "تلميع",
+    nameEn: "Polishing",
+    description: "إعادة اللمعان للطلاء وإزالة الشوائب السطحية",
+    descriptionEn: "Restores the paint's gloss and removes surface impurities",
     icon: Sparkles,
   },
+  // TODO: confirm the difference between تلميع and بوليش with the client.
+  // The client listed them as two separate services, but the exact wording
+  // distinction is still unconfirmed (see docs/VERIFIED_FACTS.md TODO list).
   {
-    id: "ceramic-coating",
-    name: "Graphene Coating",
-    description:
-      "The ultimate shield of brilliance — advanced graphene coating that delivers deep gloss, smooth touch, and long-term resistance against the elements.",
-    duration: "2–3 days",
-    icon: Shield,
+    id: "polish-machine",
+    name: "بوليش",
+    nameEn: "Machine Polish",
+    description: "تلميع بالماكينة لإزالة الخدوش والهالات",
+    descriptionEn: "Machine polishing to remove scratches and swirl marks",
+    icon: Layers,
   },
   {
-    id: "paint-protection-film",
-    name: "Paint Protection Film",
-    description:
-      "Invisible armor for your paint — defends against scratches, chips, and road damage.\nAvailable in Gloss & Matt.\nXPEL  |  AVERY DENNISON  |  LUMINOUS",
-    duration: "2 days",
-    icon: Layers,
+    id: "nano-ceramic",
+    name: "نانو سيراميك",
+    nameEn: "Nano Ceramic Coating",
+    description: "طبقة حماية نانو سيراميك تدوم طويلاً وتعزل الطلاء",
+    descriptionEn:
+      "A long-lasting nano ceramic protective layer that seals the paint",
+    icon: Shield,
   },
 ];
 

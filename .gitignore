@@ -7,11 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +17,29 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Build outputs
+node_modules
+dist
+dist-ssr
+*.local
+
+# Localization / environment
+.env
+.env.*
+! .env.example
+logs/
+*.log
+
+# Special files to keep locally but ignore in repo
+.opencode/
+AGENTS.md
+CLIENT-BRIEF.md
+KICKOFF.md
+docs/
+raw/
+lh-before.json
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,26 +1,8 @@
-# Car Detailing Studio — Website Template
+# OpenCode setup package
 
-A single-page React + TypeScript + Vite template for car detailing studios:
-hero, services, process, before/after gallery, facility, pricing, testimonials
-and a WhatsApp booking form, with a floating WhatsApp contact button.
-
-Built with React 19, Vite, Tailwind CSS v4 and Radix-based UI primitives.
-
-## Commands
-
-```bash
-npm install     # install dependencies
-npm run dev     # start the dev server
-npm run build   # type-check and build for production
-npm run lint    # run oxlint
-npm run preview # preview the production build
-```
-
-## Getting started
-
-All business details (name, phone, email, address, hours, WhatsApp number,
-currency) live in `src/data/site.ts`. Services, pricing, testimonials and
-marquee brands live in `src/data/`.
-
-See **[CUSTOMIZATION.md](./CUSTOMIZATION.md)** for the full step-by-step guide
-to rebranding the template for a new client.
+1. Unzip into the ROOT of the project (next to package.json). Commit first: `git init && git add -A && git commit -m "template"` (so you can diff or revert).
+2. Put `clients.md` and `brief.md` in the project root (or `docs/`). The agents read both and check every fact against them; conflicts are logged in `docs/DISCREPANCIES.md` and the reconciled table is `docs/VERIFIED_FACTS.md` (both are created in Phase 0).
+3. Put the client's media in `public/assets/` and fill `docs/MEDIA_MANIFEST.md`.
+4. Run `opencode` in the project root, select the `build` agent, and paste the contents of `KICKOFF.md`.
+5. Agent files are in `.opencode/agents/`. If your OpenCode version uses the older folder name, rename it to `.opencode/agent/`.
+   Check which one is loaded by typing `@` in the prompt; the six agents (a-foundation ... f-integrator) should appear.

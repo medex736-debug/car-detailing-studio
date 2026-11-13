@@ -1,15 +1,33 @@
 @import 'tailwindcss';
 
+/* English fonts — Latin normal subsets only (loaded only when lang="en"). */
+@font-face {
+  font-family: 'Cormorant Garamond Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
 /* ---------------------------------------------------------------------------
-   shadcn-style token surface (dark-only). Primitive components read these,
-   so theming stays in one file. Colors per brand brief:
+   shadcn-style token surface (dark-only). Colors per brand brief (black + gold):
      onyx      #0B0B0D  primary background
      graphite  #4A4E58  structure (borders, dividers, card surfaces)
-     emerald   #0B4F82  functional (hover, active form, icons)
-     gold      #B08D57  highlight, sparing (<8%)
+     gold      #C9A24B  functional + accent (buttons, active form, icons)
    --background is onyx; --muted is the lifted near-black #111318.
    Gunmetal is deliberately NOT used for text: on onyx it fails contrast.
    Body copy uses --muted-foreground (light grey, ~7:1 on onyx).
+   Brand colors are frozen: the golden-ratio system below never redefines them.
 --------------------------------------------------------------------------- */
 
 :root {
@@ -19,8 +37,8 @@
   --card-foreground: #e9e7e2;
   --popover: #111318;
   --popover-foreground: #e9e7e2;
-  --primary: #0b4f82;
-  --primary-foreground: #e9e7e2;
+  --primary: #c9a24b;
+  --primary-foreground: #0b0b0d;
   --secondary: #1a1d22;
   --secondary-foreground: #c9cbd1;
   --muted: #111318;
@@ -31,12 +49,45 @@
   --destructive-foreground: #e9e7e2;
   --border: #34373e;
   --input: #34373e;
-  --ring: #b08d57;
+  --ring: #c9a24b;
 
   --graphite: #4a4e58;
-  --gold: #b08d57;
-  --gold-soft: rgba(176, 141, 87, 0.16);
+  --gold: #c9a24b;
+  --gold-soft: rgba(201, 162, 75, 0.16);
   --section-bg: #0d0d10;
+
+  /* Golden-ratio constants */
+  --phi: 1.618;
+  --phi-inv: 0.618;
+  --phi-sq: 2.618;
+  --phi-root: 1.272;
+
+  /* Fibonacci spacing scale — the only values used for gaps/padding/margins */
+  --space-1: 0.5rem;      /* 8  */
+  --space-2: 0.8125rem;   /* 13 */
+  --space-3: 1.3125rem;   /* 21 */
+  --space-4: 2.125rem;    /* 34 */
+  --space-5: 3.4375rem;   /* 55 */
+  --space-6: 5.5625rem;   /* 89 */
+  --space-7: 9rem;        /* 144 */
+
+  /* Motion tokens (Fibonacci ms) */
+  --t-1: 144ms;
+  --t-2: 233ms;
+  --t-3: 377ms;
+  --t-4: 610ms;
+  --t-5: 987ms;
+  --t-6: 2584ms;
+
+  --ease-out: cubic-bezier(0.236, 0.618, 0.382, 1);
+  --ease-in-out: cubic-bezier(0.382, 0, 0.618, 1);
+
+  /* Reading direction for RTL-aware nudges */
+  --dir: 1;
+}
+
+[dir='rtl'] {
+  --dir: -1;
 }
 
 @theme inline {
@@ -63,10 +114,22 @@
   --color-gold: var(--gold);
   --color-section-bg: var(--section-bg);
 
-  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Switzer', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'El Messiri Variable', 'El Messiri', 'Plex Arabic Fallback',
+    ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans Arabic', 'Plex Arabic Fallback', ui-sans-serif,
+    system-ui, sans-serif;
 
   --breakpoint-xs: 26rem;
+}
+
+/* Fallback metrics keep the swap from shifting the layout. */
+@font-face {
+  font-family: 'Plex Arabic Fallback';
+  src: local('Arial'), local('Segoe UI'), local('Tahoma');
+  size-adjust: 105%;
+  ascent-override: 92%;
+  descent-override: 22%;
+  line-gap-override: 0%;
 }
 
 /* ---------------------------------------------------------------------------
@@ -87,30 +150,31 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     font-weight: 400;
-    line-height: 1.65;
+    line-height: 1.8;
+    font-kerning: normal;
+    font-feature-settings: 'kern' 1;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     max-width: 100%;
   }
 
-  /* Fraunces at its sharp editorial cut: high optical size, low softness. */
+  /* Arabic is a joined script: no negative tracking (it breaks the joins) and
+     looser leading than a Latin serif (1.35 wins over the golden 1.272). */
   .font-display,
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-variation-settings:
-      'opsz' 144,
-      'SOFT' 0,
-      'WONK' 1;
-    font-weight: 360;
-    letter-spacing: -0.015em;
-    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.35;
+    text-wrap: balance;
   }
 
   p {
-    max-width: 68ch;
+    max-width: 62ch;
+    text-wrap: pretty;
   }
 
   input,
@@ -120,7 +184,7 @@
   }
 
   ::selection {
-    background: var(--gold-soft);
+    background: rgba(201, 162, 75, 0.25);
     color: var(--gold);
   }
 
@@ -131,15 +195,229 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Motion
-   One deliberate moment (hero ease-in) on load; marquee via CSS loop.
-   Everything else stays static. Reduced-motion flips both off.
+   Golden-ratio type + spacing utilities
+--------------------------------------------------------------------------- */
+
+@layer components {
+  .text-h1 {
+    font-size: clamp(2.618rem, 6.5vw, 4.236rem);
+    line-height: 1.35;
+  }
+
+  .text-h2 {
+    font-size: clamp(1.75rem, 3.6vw, 2.618rem);
+    line-height: 1.35;
+  }
+
+  .text-h3 {
+    font-size: clamp(1.4rem, 2.4vw, 2.058rem);
+    line-height: 1.35;
+  }
+
+  .text-h4 {
+    font-size: 1.618rem;
+    line-height: 1.4;
+  }
+
+  .text-lead {
+    font-size: 1.272rem;
+    line-height: 1.7;
+  }
+
+  .text-small {
+    font-size: 0.786rem;
+    line-height: 1.6;
+  }
+
+  .section-y {
+    padding-block: clamp(var(--space-5), 9vw, var(--space-7));
+  }
+
+  .pad-card {
+    padding: var(--space-4);
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   English typography — scoped to <html lang="en">. Arabic keeps El Messiri
+   and IBM Plex Sans Arabic untouched. Latin only: Cormorant Garamond display,
+   Inter body, headings at 1.2 and body at 1.6.
+--------------------------------------------------------------------------- */
+
+html[lang='en'] {
+  --font-en-display: 'Cormorant Garamond Variable', 'El Messiri Variable',
+    Georgia, serif;
+  --font-en-sans: 'Inter Variable', 'IBM Plex Sans Arabic', ui-sans-serif,
+    system-ui, sans-serif;
+  hyphens: none;
+}
+
+html[lang='en'] body {
+  font-family: var(--font-en-sans);
+  line-height: 1.6;
+}
+
+html[lang='en'] .font-display,
+html[lang='en'] h1,
+html[lang='en'] h2,
+html[lang='en'] h3 {
+  font-family: var(--font-en-display);
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+html[lang='en'] .text-h1,
+html[lang='en'] .text-h2,
+html[lang='en'] .text-h3,
+html[lang='en'] .text-h4 {
+  line-height: 1.2;
+}
+
+html[lang='en'] p {
+  max-width: 68ch;
+}
+
+/* Arabic fragments inside the English page (review, language switch). */
+html[lang='en'] [lang='ar'] {
+  font-family: var(--font-display);
+}
+
+/* ---------------------------------------------------------------------------
+   Surface effects — light on polished paint
+--------------------------------------------------------------------------- */
+
+.glint {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.glint::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 100%
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  opacity: 0;
+}
+
+.glint:hover::after,
+.glint:focus-visible::after {
+  animation: glint-sweep var(--t-5) var(--ease-out);
+}
+
+@keyframes glint-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+.img-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.vignette {
+  position: relative;
+}
+
+.vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    120% 100% at 50% 40%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  transition: opacity var(--t-5) var(--ease-out);
+}
+
+.group:hover .vignette::before,
+.vignette:hover::before {
+  opacity: 1;
+}
+
+.glow-gold {
+  position: relative;
+}
+
+.glow-gold::before {
+  content: '';
+  position: absolute;
+  inset: -15%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(201, 162, 75, 0.12),
+    transparent 70%
+  );
+}
+
+.glow-gold > * {
+  position: relative;
+  z-index: 1;
+}
+
+.shadow-warm {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 24px 48px -32px rgba(201, 162, 75, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Faint film grain over the whole page (never intercepts pointer events). */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion — transforms, opacity and clip-path only
 --------------------------------------------------------------------------- */
 
 @keyframes hero-in {
   from {
     opacity: 0;
-    transform: scale(1.035);
+    transform: scale(1.0618);
   }
   to {
     opacity: 1;
@@ -147,21 +425,323 @@
   }
 }
 
-@keyframes marquee {
+.js .hero-img {
+  animation: hero-in var(--t-6) var(--ease-out) both;
+}
+
+@keyframes hero-parallax {
   from {
-    transform: translateX(0);
+    transform: translateY(-4%) scale(1.08);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateY(4%) scale(1.08);
   }
 }
 
-.marquee-track {
-  animation: marquee 42s linear infinite;
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .js .hero-parallax {
+      animation: hero-parallax linear;
+      animation-timeline: view();
+      animation-range: entry 0% cover 100%;
+    }
+  }
 }
 
-/* Gentle expanding halo for the floating WhatsApp button — a soft ring that
-   fades out as it grows, not a blink. */
+/* Hero text: overline, title, paragraph, buttons rise in 89ms steps. */
+.js .hero-seq-item {
+  opacity: 0;
+  transform: translateY(21px);
+  animation: hero-item-in var(--t-4) var(--ease-out) forwards;
+}
+
+@keyframes hero-item-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-rule {
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+[dir='ltr'] .hero-rule {
+  transform-origin: left center;
+}
+
+.js .hero-rule {
+  animation: rule-in var(--t-4) var(--ease-out) forwards;
+}
+
+@keyframes rule-in {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Word-by-word title (per word only: splitting Arabic letters breaks joins). */
+.hero-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+  vertical-align: bottom;
+}
+
+.hero-word {
+  display: inline-block;
+}
+
+.js .hero-word {
+  transform: translateY(110%);
+  opacity: 0;
+  animation: hero-word-in var(--t-4) var(--ease-out) forwards;
+}
+
+@keyframes hero-word-in {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.scroll-cue {
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--space-4);
+  margin-inline: auto;
+  display: flex;
+  height: 55px;
+  width: 1px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.scroll-cue span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--gold);
+  transform-origin: top center;
+  animation: cue-drop var(--t-6) var(--ease-in-out) infinite;
+}
+
+@keyframes cue-drop {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@media (max-height: 640px) {
+  .scroll-cue {
+    display: none;
+  }
+}
+
+/* Reveal on scroll (FadeIn) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(21px);
+  transition:
+    opacity var(--t-4) var(--ease-out),
+    transform var(--t-4) var(--ease-out);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .js .reveal {
+    transform: translateY(13px);
+  }
+}
+
+/* Reviews slide in from the reading (start) side */
+.js .reveal-x {
+  opacity: 0;
+  transform: translateX(calc(-21px * var(--dir)));
+  transition:
+    opacity var(--t-4) var(--ease-out),
+    transform var(--t-4) var(--ease-out);
+}
+
+.js .reveal-x.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Portfolio image clip reveal + settle (view-timeline, graceful fallback) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .clip-reveal {
+      animation: clip-in linear;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+
+    .clip-reveal img {
+      animation: clip-settle linear;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+  }
+}
+
+@keyframes clip-in {
+  from {
+    clip-path: inset(8% 0 8% 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes clip-settle {
+  from {
+    transform: scale(1.0618);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Nav: active gold underline growing from the start edge */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0.25rem;
+  height: 1px;
+  width: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--t-2) var(--ease-out);
+}
+
+[dir='ltr'] .nav-link::after {
+  transform-origin: left center;
+}
+
+.nav-link:hover::after,
+.nav-link[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+.js .menu-item {
+  opacity: 0;
+  transform: translateY(13px);
+  animation: hero-item-in var(--t-3) var(--ease-out) forwards;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 60;
+  height: 2px;
+  pointer-events: none;
+  background: var(--gold);
+  transform-origin: right center;
+}
+
+[dir='ltr'] .scroll-progress {
+  transform-origin: left center;
+}
+
+/* Arrow nudges toward the reading direction (RTL-aware via --dir) */
+.arrow-nudge {
+  transition: transform var(--t-2) var(--ease-out);
+}
+
+.group:hover .arrow-nudge,
+.group:focus-visible .arrow-nudge {
+  transform: translateX(calc(8px * var(--dir)));
+}
+
+.lift {
+  transition: transform var(--t-2) var(--ease-out);
+}
+
+.lift:hover {
+  transform: translateY(-5px);
+}
+
+/* Portfolio pointer highlight (desktop only, rAF-throttled via --mx/--my) */
+.portfolio-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(201, 162, 75, 0.14),
+    transparent 65%
+  );
+  transition: opacity var(--t-3) var(--ease-out);
+}
+
+@media (pointer: fine) {
+  .portfolio-card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Custom video play button pulse, paused off-screen and under reduced motion */
+.play-ring {
+  animation: play-pulse var(--t-6) var(--ease-in-out) infinite;
+}
+
+.play-ring[data-paused='true'] {
+  animation-play-state: paused;
+}
+
+@keyframes play-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 75, 0.32);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(201, 162, 75, 0);
+  }
+}
+
+/* Gallery hover: dim the siblings, lift the hovered frame */
+.gallery-grid .gallery-item {
+  transition:
+    opacity var(--t-3) var(--ease-out),
+    transform var(--t-3) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .gallery-grid:hover .gallery-item {
+    opacity: 0.75;
+  }
+
+  .gallery-grid .gallery-item:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+/* WhatsApp halo — color untouched, timing on the motion scale */
 @keyframes wa-glow {
   0% {
     box-shadow:
@@ -181,48 +761,35 @@
 }
 
 .wa-glow {
-  animation: wa-glow 2.8s ease-out infinite;
+  animation: wa-glow var(--t-6) ease-out infinite;
 }
+
+/* ---------------------------------------------------------------------------
+   Reduced motion
+--------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .marquee-track,
-  .wa-glow {
+
+  .wa-glow,
+  .play-ring,
+  .scroll-cue span {
     animation: none;
   }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.001s !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.001s !important;
   }
 }
 
 /* ---------------------------------------------------------------------------
-   Viewport fade-in (JS-toggled via useInView hook).
-   Elements start invisible, fade + lift once when they enter the viewport.
-   Stagger via CSS custom property --i on siblings.
---------------------------------------------------------------------------- */
-
-.animate-in {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.animate-in.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---------------------------------------------------------------------------
-   Placeholder image slots
-   Muted gunmetal blocks, exact aspect/crop for each slot. Real photos drop
-   in with no layout change — no AI-generated car imagery per brand brief.
+   Placeholder image slots (legacy, unused by the media-driven sections)
 --------------------------------------------------------------------------- */
 
 .media-slot {
@@ -243,27 +810,6 @@
   isolation: isolate;
 }
 
-/* Caption strip only where one is actually given (Gallery comparator layers
-   deliberately carry none). */
-.media-slot[data-caption]:not([data-caption=""])::after {
-  content: attr(data-caption);
-  position: absolute;
-  z-index: 1;
-  inset: auto 0 0 0;
-  margin: 0;
-  padding: 0.45rem 1rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.07em;
-  line-height: 1.4;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: var(--graphite);
-  background: rgba(11, 11, 13, 0.72);
-  border-top: 1px solid var(--border);
-  backdrop-filter: blur(2px);
-}
-
-/* Diameter marker centered in empty slots — suggests the subject, never fakes it */
 .media-slot::before {
   content: '';
   position: absolute;

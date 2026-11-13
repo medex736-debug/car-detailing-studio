@@ -4,28 +4,31 @@ export interface Testimonial {
   vehicle?: string;
   service?: string;
   quote: string;
+  lang?: "ar" | "en";
 }
 
 /**
- * Real client reviews, quoted exactly as written.
+ * Real client reviews from Google Maps, quoted exactly as written
+ * (source: CLIENT-BRIEF.md §6 → docs/VERIFIED_FACTS.md). Do not rewrite,
+ * shorten, translate or improve them.
+ * `city`, `vehicle` and `service` are optional: render them only when set.
  */
 export const testimonials: Testimonial[] = [
   {
-    name: "Abdulrhman Al Darwish",
-    quote: "Great experience and great staff .. reasonable price.",
-  },
-  {
-    name: "Werner Luzny",
+    name: "Mo'men Omer",
+    lang: "en",
     quote:
-      "A team of experts with high skills and competencies, they are truly the best!",
+      "Professional team and really hard working to give you the best results.\nHighly recommended.\nKeep it up 👍",
   },
   {
-    name: "Khaled Shash",
-    quote: "Professional handling\nGreat material\nBest services",
+    name: "Asad Khaci",
+    lang: "en",
+    quote: "Nice work .I like this work because it is very Good work",
   },
   {
-    name: "Rogel Gatmaitan",
+    name: "فضل محمد",
+    lang: "ar",
     quote:
-      "Best shop ever must experience there service..very professional people and accommodating..2 THUMBS UP",
+      "انصح بل تعامل مع هذا المحل\nشغل ممتاز وخبرة عالية\nادخلت سيارتي وفيها مشاكل في الصبغ\nوالحمد لله تم التعامل بحرفية تامة\nوادوا العمل بنجاح\nادعو لهم بل توفيق",
   },
 ];

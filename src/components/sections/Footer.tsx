@@ -1,60 +1,58 @@
-import { site } from "@/data/site";
+import { LanguageSwitch } from "@/components/LanguageSwitch";
+import { useI18n } from "@/i18n";
 import { assetUrl } from "@/lib/assets";
 
 export function Footer() {
+  const { t, site } = useI18n();
+  const { instagram, facebook } = site.social;
+
   return (
     <footer className="border-t border-border pb-24 md:pb-0">
       <div className="h-px w-24 bg-gold" aria-hidden="true" />
 
-      <div className="mx-auto max-w-6xl px-4 py-16 md:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
+      <div className="mx-auto max-w-6xl px-4 py-[var(--space-6)] md:px-8">
+        <div className="grid gap-[var(--space-4)] md:grid-cols-4">
           <div className="md:col-span-1">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1">
+            <a
+              href="#top"
+              className="inline-flex min-h-[44px] items-center"
+              aria-label={t.common.backToTop(site.name)}
+            >
               <img
-                src={assetUrl("assets/logo.png")}
+                src={assetUrl("/assets/logo-mark.png")}
                 alt={site.name}
-                className="h-full w-full rounded-full object-cover"
+                className="h-auto w-32 object-contain"
               />
-            </span>
+            </a>
             <span
-              className="mt-3 block h-px w-10 bg-gold"
+              className="mt-[var(--space-2)] block h-px w-10 bg-gold"
               aria-hidden="true"
             />
-            <p className="mt-4 max-w-56 text-sm text-muted-foreground">
-              {site.nameTagline}. Correction, coating and protection for
-              vehicles that are driven sparingly and looked at closely.
+            <p className="mt-[var(--space-2)] max-w-56 text-sm text-muted-foreground">
+              {site.nameTagline}
             </p>
           </div>
 
           <div className="md:col-span-1">
-            <h3 className="text-sm font-medium text-foreground">Visit</h3>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>{site.address.line1}</li>
-              <li>{site.address.line2}</li>
+            <h3 className="text-sm font-medium text-foreground">
+              {t.footer.addressLabel}
+            </h3>
+            <ul className="mt-[var(--space-2)] space-y-[var(--space-1)] text-sm text-muted-foreground">
               <li>
-                {site.address.city}, {site.address.postal}
-              </li>
-              <li className="pt-1">
-                <a
-                  href="https://maps.app.goo.gl/pX8QSB1VRCdN7ozAA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
-                >
-                  View on Google Maps
-                </a>
+                {site.address.area}
+                {t.common.addressSeparator}
+                {site.address.city}
               </li>
             </ul>
-            <p className="mt-4 text-xs leading-relaxed text-graphite">
-              {site.serviceArea}
-            </p>
           </div>
 
           <div className="md:col-span-1">
-            <h3 className="text-sm font-medium text-foreground">Hours</h3>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            <h3 className="text-sm font-medium text-foreground">
+              {t.footer.hoursLabel}
+            </h3>
+            <ul className="mt-[var(--space-2)] space-y-[var(--space-1)] text-sm text-muted-foreground">
               {site.hours.map((h) => (
-                <li key={h.days} className="flex justify-between gap-6">
+                <li key={h.days} className="tnum flex justify-between gap-[var(--space-3)]">
                   <span>{h.days}</span>
                   <span>{h.time}</span>
                 </li>
@@ -63,59 +61,63 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-1">
-            <h3 className="text-sm font-medium text-foreground">Contact</h3>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            <h3 className="text-sm font-medium text-foreground">
+              {t.footer.contactLabel}
+            </h3>
+            <ul className="mt-[var(--space-2)] space-y-[var(--space-1)] text-sm text-muted-foreground">
               <li>
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="inline-flex min-h-[44px] items-center underline-offset-4 hover:text-foreground"
+                  dir="ltr"
+                  className="tnum inline-flex min-h-[44px] items-center underline-offset-4 hover:text-foreground"
                 >
                   {site.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex min-h-[44px] items-center break-all underline-offset-4 hover:text-foreground"
-                >
-                  {site.email}
-                </a>
-              </li>
-            </ul>
-            <p className="mt-4 text-xs text-graphite">
-              Slots are held at booking and confirmed within four working
-              hours.
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-              <li>
-                <a
-                  href="https://www.instagram.com/974cardetailing?igsh=MTVxczRuZXZ4ZDhzag%3D%3D&utm_source=qr"
+                  href={`https://wa.me/${site.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
+                  className="inline-flex min-h-[44px] items-center underline-offset-4 hover:text-foreground"
                 >
-                  Instagram
+                  {t.footer.whatsapp}
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://www.tiktok.com/@974_cardetailing?_t=ZS-90z2wuXkXQY&_r=1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center underline underline-offset-4 transition-colors hover:text-foreground"
-                >
-                  TikTok
-                </a>
-              </li>
+              {instagram && (
+                <li>
+                  <a
+                    href={instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[44px] items-center underline-offset-4 hover:text-foreground"
+                  >
+                    {t.footer.instagram}
+                  </a>
+                </li>
+              )}
+              {facebook && (
+                <li>
+                  <a
+                    href={facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[44px] items-center underline-offset-4 hover:text-foreground"
+                  >
+                    {t.footer.facebook}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-border pt-6 text-xs text-graphite sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
-          </p>
-          <p>Booked by slot, priced after inspection.</p>
+        <div className="mt-[var(--space-5)] flex flex-col gap-[var(--space-1)] border-t border-border pt-[var(--space-3)] text-xs text-graphite sm:flex-row sm:items-center sm:justify-between">
+          <p>{t.footer.rights(new Date().getFullYear(), site.shortName)}</p>
+          <div className="flex flex-wrap items-center gap-[var(--space-2)]">
+            <p>{t.footer.priceNote}</p>
+            <LanguageSwitch variant="footer" />
+          </div>
         </div>
       </div>
     </footer>

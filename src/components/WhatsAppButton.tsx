@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
 
-import { site } from "@/data/site";
+import { useI18n } from "@/i18n";
 
 /**
  * Floating WhatsApp contact button (site-wide, additive only).
  *
  * Deliberately separate from the booking flow: it carries its own number and
- * a short generic Arabic greeting, and never touches the Booking component's
+ * a short localized greeting, and never touches the Booking component's
  * message logic.
  *
  * Mobile offset sits above the fixed bottom booking bar (StickyCTA) so the
  * two never overlap; desktop uses the requested 24px inset. The button dims
  * itself while the nav's full-screen mobile menu is open so it never floats
- * over that overlay.
+ * over that overlay. It stays on the same physical side in both languages.
  */
-
-const GREETING = "مرحباً، أرغب بالاستفسار عن خدماتكم";
-
-const WHATSAPP_URL = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(GREETING)}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -33,7 +29,11 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export function WhatsAppButton() {
+  const { t, site } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
+  const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+    t.whatsapp.greeting,
+  )}`;
 
   // The nav hamburger owns aria-expanded; watch it so the floating button can
   // stand down while the full-screen mobile menu is up. Purely additive — the
@@ -58,10 +58,10 @@ export function WhatsAppButton() {
 
   return (
     <a
-      href={WHATSAPP_URL}
+      href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
+      aria-label={t.whatsapp.aria}
       aria-hidden={menuOpen || undefined}
       tabIndex={menuOpen ? -1 : undefined}
       className={[

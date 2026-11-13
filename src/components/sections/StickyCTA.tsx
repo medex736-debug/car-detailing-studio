@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 /**
  * Mobile-only booking bar, quiet by design: a plain outline button pinned to
@@ -10,6 +11,7 @@ import { cn } from "@/lib/utils";
  * covers the form's fields or its own submit button.
  */
 export function StickyCTA() {
+  const { t } = useI18n();
   const [overBooking, setOverBooking] = useState(false);
 
   useEffect(() => {
@@ -28,13 +30,13 @@ export function StickyCTA() {
     <div
       aria-hidden={overBooking || undefined}
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/90 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md transition-transform duration-300 md:hidden",
+        "fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/90 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md transition-transform duration-[233ms] [transition-timing-function:var(--ease-out)] md:hidden",
         overBooking && "pointer-events-none translate-y-full"
       )}
     >
       <Button asChild variant="outline" className="w-full">
         <a href="#booking" tabIndex={overBooking ? -1 : undefined}>
-          Book a detail
+          {t.common.bookNow}
         </a>
       </Button>
     </div>

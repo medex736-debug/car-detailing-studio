@@ -382,6 +382,6 @@ src/
                             Facility, Pricing, Reviews, Booking, Footer, StickyCTA
     ui/*.tsx                button, card, field, switch, pricing-module
 ```
-
+Restructure the website homepage according to the provided wireframe. Keep the existing visual identity and styling, but change the layout and section order as follows: **1. Navigation Bar** at the top, followed by **2. Hero Section**, **3. Trust Bar**, **4. Services Section**, **5. Portfolio / Work Gallery**, **6. Pricing Section**, **7. Google Reviews Section**, **8. Location & Business Hours Section**, **9. WhatsApp Booking Section**, and **10. Footer**. Remove the **Brands Marquee** section and the **How We Work / Process** section entirely. Do not simply hide these sections; remove their components from the homepage layout and clean up any navigation links pointing to them. Add a fixed WhatsApp contact bar at the bottom of mobile screens, alongside the existing floating WhatsApp button. Ensure that all navigation links, section anchors, and calls to action point to the correct sections after restructuring. Preserve the existing reusable components wherever possible, avoid unnecessary changes to unrelated parts of the project, and make sure the new layout is fully responsive on both mobile and desktop devices.
 **Commands:** `npm run dev` · `npm run build` · `npm run lint` ·
 `npm run preview`

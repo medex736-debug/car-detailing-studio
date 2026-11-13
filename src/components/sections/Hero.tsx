@@ -1,75 +1,114 @@
-import { ArrowDown } from "lucide-react";
-
 import { assetUrl } from "@/lib/assets";
 import { Button } from "@/components/ui/button";
-import { site } from "@/data/site";
+import { HeroTitle } from "@/components/motion/HeroTitle";
+import { ScrollCue } from "@/components/motion/ScrollCue";
+import { media } from "@/data/media";
+import { useI18n } from "@/i18n";
+
+/** Hero image comes from the media manifest (docs/MEDIA_MANIFEST.md). */
+const heroImage = assetUrl(
+  media.hero ? `/assets/${media.hero}` : "/assets/Hero.jpg"
+);
 
 export function Hero() {
+  const { t, site } = useI18n();
+  const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+    t.hero.whatsappGreeting,
+  )}`;
+  const telUrl = `tel:${site.phone.replace(/\s/g, "")}`;
+
   return (
     <section
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      {/* One motion moment: the hero image eases in on load. Everything after
-          this stays static. Reduced-motion disables the animation globally. */}
-      <img
-        src={assetUrl("/assets/Hero.jpg")}
-        alt=""
-        aria-hidden="true"
-        loading="eager"
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        style={{
-          animation: "hero-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both",
-        }}
-      />
-      {/* Dark overlay for text readability over the paint reflection */}
+      {/* Image settles once; the wrapper adds a light view-timeline parallax. */}
+      <div className="hero-parallax absolute inset-0 z-0">
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          className="hero-img absolute inset-0 h-full w-full object-cover object-[50%_40%]"
+        />
+      </div>
+
+      {/* Dark overlay for text readability; darkest on the text (start) side. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[1] bg-gradient-to-r from-background/90 via-background/60 to-background/30"
+        className="absolute inset-0 z-[1] bg-gradient-to-l from-background/90 via-background/60 to-background/30 ltr:bg-gradient-to-r"
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-32 pt-28 md:px-8">
-        <span
-          className="mb-8 block h-px w-16 bg-gold"
-          aria-hidden="true"
-        />
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-[max(var(--space-7),24svh)] pt-[max(var(--space-6),14svh)] md:px-8">
+        <div className="glow-gold max-w-3xl">
+          <span
+            className="hero-rule mb-[var(--space-3)] block h-px w-16 bg-gold"
+            aria-hidden="true"
+          />
 
-        <h1 className="max-w-3xl break-words text-[clamp(1.85rem,7vw,4.4rem)] text-foreground">
-          Paint correction and ceramic protection for cars that show every
-          mark.
-        </h1>
+          <HeroTitle
+            text={t.hero.title}
+            className="text-h1 max-w-3xl break-words text-foreground"
+          />
 
-        <p className="mt-5 max-w-xl text-base text-muted-foreground sm:mt-7 sm:text-lg">
-          Single-slot detailing. Paint depth measured before and after each
-          pass, interiors steamed rather than sprayed, and a protection
-          schedule built to outlast the season. Booked by appointment,
-          finished on time.
-        </p>
+          <p
+            className="hero-seq-item mt-[var(--space-3)] max-w-xl text-base text-muted-foreground sm:text-lg"
+            style={{ animationDelay: "267ms" }}
+          >
+            {t.hero.paragraph}
+          </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
-          <Button asChild size="lg">
-            <a href="#booking">Book a detail</a>
-          </Button>
-          <Button asChild size="lg" variant="ghost">
-            <a href="#services" className="gap-2">
-              See the work <ArrowDown className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Button>
+          <div
+            className="hero-seq-item mt-[var(--space-5)] flex flex-wrap items-center gap-[var(--space-3)]"
+            style={{ animationDelay: "356ms" }}
+          >
+            <Button
+              asChild
+              size="lg"
+              className="glint min-h-[55px] px-[var(--space-4)]"
+            >
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                {t.hero.whatsappCta}
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="ghost"
+              className="min-h-[55px] px-[var(--space-3)]"
+            >
+              <a href={telUrl}>{t.common.callNow}</a>
+            </Button>
+          </div>
+
+          <dl className="hero-seq-item mt-[var(--space-5)] grid max-w-lg grid-cols-1 gap-[var(--space-3)] border-t border-border pt-[var(--space-3)] text-sm sm:grid-cols-2">
+            <div>
+              <dt className="font-medium text-foreground">
+                {t.hero.locationLabel}
+              </dt>
+              <dd className="mt-1 text-muted-foreground">
+                {site.address.area}
+                {t.common.addressSeparator}
+                {site.address.city}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium text-foreground">
+                {t.hero.hoursLabel}
+              </dt>
+              <dd className="tnum mt-1 text-muted-foreground">
+                {site.hours.map((h) => (
+                  <span key={h.days} className="block">
+                    {h.days}: {h.time}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          </dl>
         </div>
-
-        <dl className="mt-12 grid max-w-lg grid-cols-1 gap-4 border-t border-border pt-6 text-sm sm:mt-16 sm:grid-cols-2 sm:gap-6">
-          <div>
-            <dt className="font-medium text-foreground">Location</dt>
-            <dd className="mt-1 text-muted-foreground">
-              {site.address.city}, {site.address.line2}
-            </dd>
-          </div>
-          <div>
-            <dt className="font-medium text-foreground">Service area</dt>
-            <dd className="mt-1 text-muted-foreground">{site.serviceArea}</dd>
-          </div>
-        </dl>
       </div>
+
+      <ScrollCue />
     </section>
   );
 }

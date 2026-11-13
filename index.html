@@ -1,28 +1,79 @@
 <!doctype html>
-<html lang="en" style="color-scheme: dark">
+<html lang="ar" dir="rtl" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        var lang = null;
+        try {
+          var param = new URLSearchParams(window.location.search).get("lang");
+          if (param === "en" || param === "ar") lang = param;
+          else lang = window.localStorage.getItem("lang");
+        } catch (e) {}
+        if (lang !== "en" && lang !== "ar") lang = "ar";
+        root.lang = lang;
+        root.dir = lang === "ar" ? "rtl" : "ltr";
+      })();
+    </script>
     <meta
       name="description"
-      content="974 | The Art Factory — premium car detailing, tinting, graphene coating and paint protection film in Doha, Qatar."
+      content="سيراميك جولدن لتلميع السيارات في المصفح، أبوظبي — تنظيف وتلميع وبوليش وطلاء نانو سيراميك للسيارات. للحجز والاستفسار: +971 55 215 5543."
     />
-    <meta name="theme-color" content="#0b4f82" />
+    <meta name="theme-color" content="#0b0b0d" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>974 | The Art Factory — Car Detailing in Doha</title>
+    <title>سيراميك جولدن | تلميع وسيراميك السيارات في المصفح، أبوظبي</title>
 
-    <!-- Switzer (Fontshare), weights 400/500 only -->
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link
-      rel="preconnect"
-      href="https://cdn.fontshare.com"
-      crossorigin
+    <meta
+      property="og:title"
+      content="سيراميك جولدن | تلميع وسيراميك السيارات في المصفح، أبوظبي"
     />
-    <link
-      rel="stylesheet"
-      href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&display=swap"
+    <meta
+      property="og:description"
+      content="سيراميك جولدن لتلميع السيارات في المصفح، أبوظبي — تنظيف وتلميع وبوليش وطلاء نانو سيراميك للسيارات. للحجز والاستفسار: +971 55 215 5543."
     />
+    <meta property="og:locale" content="ar_AE" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutomotiveBusiness",
+        "name": "سيراميك جولدن لتلميع السيارات",
+        "alternateName": "Ceramic Golden Car Polishing",
+        "description": "سيراميك جولدن لتلميع السيارات في المصفح، أبوظبي — تنظيف وتلميع وبوليش وطلاء نانو سيراميك للسيارات.",
+        "telephone": "+971552155543",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "المصفح",
+          "addressLocality": "أبوظبي",
+          "addressRegion": "أبوظبي",
+          "addressCountry": "AE"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday",
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday"
+            ],
+            "opens": "08:00",
+            "closes": "21:00"
+          }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/ceramic_golden?utm_source=ig_web_button_share_sheet&vrfl=ZDNlZDc0MzIxNw==",
+          "https://www.facebook.com/people/Ceramic-golden-car-polishing/100052054497127/"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
