@@ -49,6 +49,8 @@ export function Gallery() {
                     <img
                       src={assetUrl(`/assets/${photo.file.trim()}`)}
                       alt={alt}
+                      width={photo.width}
+                      height={photo.height}
                       loading="lazy"
                       decoding="async"
                       className="aspect-[1.618/1] w-full object-cover transition-transform duration-[987ms] [transition-timing-function:var(--ease-out)] group-hover:scale-[1.0618]"

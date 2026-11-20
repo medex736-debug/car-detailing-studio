@@ -86,6 +86,8 @@ export function GalleryLightbox({ items, index, onClose, onNavigate }: GalleryLi
         <img
           src={assetUrl(`/assets/${item.file.trim()}`)}
           alt={alt}
+          width={item.width}
+          height={item.height}
           className="max-h-[80svh] w-full object-contain"
         />
         <button ref={closeRef} type="button" onClick={onClose} aria-label={t.gallery.close} className={`${CONTROL} absolute end-0 top-0`}>

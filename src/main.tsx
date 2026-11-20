@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import '@fontsource-variable/el-messiri/index.css'
 import '@fontsource/ibm-plex-sans-arabic/arabic-400.css'
 import '@fontsource/ibm-plex-sans-arabic/arabic-500.css'
@@ -32,10 +32,21 @@ if (document.documentElement.lang === 'en') {
   preloadFont(interLatin)
 }
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!
+
+const app = (
   <StrictMode>
     <LanguageProvider>
       <App />
     </LanguageProvider>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// Production builds are pre-rendered (Arabic) into #root at build time, so
+// hydrate that markup instead of throwing it away. If the visitor's saved
+// language is English, React recovers by rendering the English tree.
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app)
+} else {
+  createRoot(container).render(app)
+}

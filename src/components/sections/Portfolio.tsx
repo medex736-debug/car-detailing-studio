@@ -79,6 +79,8 @@ function PortfolioCard({
             <img
               src={imageSrc}
               alt={title || caption || t.portfolio.genericAlt}
+              width={item.width}
+              height={item.height}
               loading={featured ? "eager" : "lazy"}
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-[987ms] [transition-timing-function:var(--ease-out)] group-hover:scale-[1.0618]"

@@ -1,4 +1,5 @@
 import { Booking } from "@/components/sections/Booking";
+import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
 import { Gallery } from "@/components/sections/Gallery";
 import { Hero } from "@/components/sections/Hero";
@@ -38,6 +39,7 @@ function App() {
         <Pricing />
         <Reviews />
         <Location />
+        <Faq />
         <Booking />
       </main>
 

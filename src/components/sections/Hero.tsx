@@ -26,9 +26,12 @@ export function Hero() {
       <div className="hero-parallax absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt=""
-          aria-hidden="true"
+          alt={t.hero.imageAlt}
+          width={762}
+          height={567}
           loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="hero-img absolute inset-0 h-full w-full object-cover object-[50%_40%]"
         />
       </div>

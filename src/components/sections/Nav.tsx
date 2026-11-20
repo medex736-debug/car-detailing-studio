@@ -10,7 +10,7 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { useHideOnScroll } from "@/hooks/useHideOnScroll";
 import { useI18n } from "@/i18n";
 
-const sectionIds = ["services", "portfolio", "work", "location"];
+const sectionIds = ["services", "portfolio", "work", "location", "faq"];
 
 export function Nav() {
   const { t, site } = useI18n();
@@ -23,6 +23,7 @@ export function Nav() {
     { href: "#portfolio", label: t.nav.links.portfolio },
     { href: "#work", label: t.nav.links.gallery },
     { href: "#location", label: t.nav.links.location },
+    { href: "#faq", label: t.nav.links.faq },
   ];
 
   // Escape closes the mobile menu; body scroll locks while it is open.
@@ -63,6 +64,8 @@ export function Nav() {
             <img
               src={assetUrl("/assets/logo-mark.png")}
               alt={site.name}
+              width={316}
+              height={334}
               className="h-11 w-auto object-contain"
             />
           </a>

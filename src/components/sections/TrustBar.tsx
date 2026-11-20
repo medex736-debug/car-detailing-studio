@@ -43,6 +43,7 @@ export function TrustBar() {
 
   return (
     <section
+      id="trust"
       aria-label={t.trust.label}
       className="glint border-y border-border bg-card/40"
     >

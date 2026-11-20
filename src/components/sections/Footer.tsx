@@ -21,6 +21,8 @@ export function Footer() {
               <img
                 src={assetUrl("/assets/logo-mark.png")}
                 alt={site.name}
+                width={316}
+                height={334}
                 className="h-auto w-32 object-contain"
               />
             </a>
@@ -28,7 +30,10 @@ export function Footer() {
               className="mt-[var(--space-2)] block h-px w-10 bg-gold"
               aria-hidden="true"
             />
-            <p className="mt-[var(--space-2)] max-w-56 text-sm text-muted-foreground">
+            <p className="mt-[var(--space-2)] font-medium text-foreground">
+              {site.name}
+            </p>
+            <p className="mt-[var(--space-1)] max-w-56 text-sm text-muted-foreground">
               {site.nameTagline}
             </p>
           </div>
@@ -42,6 +47,8 @@ export function Footer() {
                 {site.address.area}
                 {t.common.addressSeparator}
                 {site.address.city}
+                {t.common.addressSeparator}
+                {site.address.country}
               </li>
             </ul>
           </div>
@@ -116,6 +123,7 @@ export function Footer() {
           <p>{t.footer.rights(new Date().getFullYear(), site.shortName)}</p>
           <div className="flex flex-wrap items-center gap-[var(--space-2)]">
             <p>{t.footer.priceNote}</p>
+            <p>{t.common.lastUpdated(__BUILD_DATE__)}</p>
             <LanguageSwitch variant="footer" />
           </div>
         </div>

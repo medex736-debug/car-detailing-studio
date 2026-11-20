@@ -12,23 +12,16 @@ export const site = {
   whatsapp: "971552155543",
   currency: "AED",
   address: { area: "المصفح", city: "أبوظبي", country: "الإمارات" },
-  hours: [
-    { days: "السبت – الخميس", time: "8:00 ص – 9:00 م" },
-    { days: "الجمعة", time: "مغلق" },
-  ],
+  hours: [{ days: "يومياً", time: "8:00 ص – 9:00 م" }],
   en: {
     name: "Ceramic Golden Car Polishing",
     shortName: "Ceramic Golden",
     nameTagline: "Car polishing and protection since 1997",
     address: { area: "Musaffah", city: "Abu Dhabi", country: "UAE" },
-    hours: [
-      { days: "Sat – Thu", time: "8:00 AM – 9:00 PM" },
-      { days: "Friday", time: "Closed" },
-    ],
+    hours: [{ days: "Daily", time: "8:00 AM – 9:00 PM" }],
   },
   social: {
-    instagram:
-      "https://www.instagram.com/ceramic_golden?utm_source=ig_web_button_share_sheet&vrfl=ZDNlZDc0MzIxNw==",
+    instagram: "https://www.instagram.com/ceramic_golden",
     facebook:
       "https://www.facebook.com/people/Ceramic-golden-car-polishing/100052054497127/",
   },

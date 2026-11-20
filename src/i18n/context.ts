@@ -74,19 +74,6 @@ function ensureMeta(attribute: "name" | "property", key: string) {
   return el;
 }
 
-function setHreflang(hreflang: string, href: string) {
-  let el = document.head.querySelector<HTMLLinkElement>(
-    `link[rel="alternate"][hreflang="${hreflang}"]`,
-  );
-  if (!el) {
-    el = document.createElement("link");
-    el.rel = "alternate";
-    el.hreflang = hreflang;
-    document.head.appendChild(el);
-  }
-  el.href = href;
-}
-
 export function syncDocument(lang: Lang, t: Dictionary) {
   const root = document.documentElement;
   root.lang = lang;
@@ -99,14 +86,4 @@ export function syncDocument(lang: Lang, t: Dictionary) {
   ensureMeta("property", "og:locale").content = t.meta.ogLocale;
   ensureMeta("property", "og:locale:alternate").content =
     lang === "ar" ? "en_US" : "ar_AE";
-
-  const url = new URL(window.location.href);
-  url.search = "";
-  url.hash = "";
-  const arUrl = url.toString();
-  const enUrl = new URL(arUrl);
-  enUrl.searchParams.set("lang", "en");
-  setHreflang("ar", arUrl);
-  setHreflang("en", enUrl.toString());
-  setHreflang("x-default", arUrl);
 }

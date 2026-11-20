@@ -6,9 +6,9 @@ import type { Dictionary } from "./ar";
  */
 export const en: Dictionary = {
   meta: {
-    title: "Ceramic Golden | Car Polishing & Ceramic Coating in Musaffah, Abu Dhabi",
+    title: "Ceramic Golden | Car Polishing in Mussafah, Abu Dhabi",
     description:
-      "Ceramic Golden Car Polishing in Musaffah, Abu Dhabi — cleaning, polishing, machine polish and nano ceramic coating for cars. Call or WhatsApp: +971 55 215 5543.",
+      "Car cleaning, polishing, machine polish and nano ceramic coating in Mussafah, Abu Dhabi. Open daily 8:00 AM–9:00 PM. Call or WhatsApp +971 55 215 5543.",
     ogLocale: "en_US",
   },
   common: {
@@ -17,6 +17,7 @@ export const en: Dictionary = {
     callNow: "Call now",
     backToTop: (name: string) => `${name} — Back to top`,
     addressSeparator: ", ",
+    lastUpdated: (date: string) => `Last updated: ${date}`,
     languageName: "English",
     languages: {
       ar: { label: "العربية", switchTo: "التبديل إلى العربية" },
@@ -30,18 +31,20 @@ export const en: Dictionary = {
       portfolio: "Our work",
       gallery: "Gallery",
       location: "Location",
+      faq: "FAQ",
     },
     openMenu: "Open menu",
     closeMenu: "Close menu",
   },
   hero: {
-    title: "Restore your car's shine and protection",
+    title: "Ceramic Golden: car polishing and protection in Mussafah, Abu Dhabi",
     paragraph:
       "Cleaning, polishing, machine polish and nano ceramic coating in Musaffah, Abu Dhabi. Careful attention to every detail so your car comes back shining.",
     whatsappCta: "Book on WhatsApp",
     whatsappGreeting: "Hello, I would like to book an appointment",
     locationLabel: "Location",
     hoursLabel: "Working hours",
+    imageAlt: "A car shining after polishing at Ceramic Golden, Mussafah, Abu Dhabi",
   },
   trust: {
     label: "Quick facts",
@@ -164,6 +167,10 @@ export const en: Dictionary = {
       note: "WhatsApp opened with your request ready to send. Press send, and our team will confirm the final appointment there.",
       again: "Send another request",
     },
+  },
+  faq: {
+    title: "Frequently asked questions",
+    intro: "Quick answers about our services in Mussafah, Abu Dhabi.",
   },
   footer: {
     addressLabel: "Address",
