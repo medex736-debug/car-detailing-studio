@@ -130,8 +130,8 @@ export const media: {
       caption: "",
     },
     {
-      file: "Video Project 1 (1).mp4",
-      poster: "",
+      file: "hero-small.mp4",
+      poster: "hero-poster.jpg",
       caption: "",
     },
   ],
