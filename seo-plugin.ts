@@ -16,7 +16,7 @@ const OG_IMAGE_PATH = "/og-image.jpg";
 const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 const LOGO_PATH = "/assets/logo-mark.png";
-const HERO_IMAGE = "/assets/WhatsApp Image 2026-11-08 at 20.06.51.jpeg";
+const HERO_IMAGE = "/assets/WhatsApp Image 2026-11-08 at 20.06.51 (1).jpeg";
 
 export function seoPlugin({ siteUrl, buildDate }: SeoPluginOptions): Plugin {
   const SITE_URL = siteUrl.replace(/\/+$/, "");

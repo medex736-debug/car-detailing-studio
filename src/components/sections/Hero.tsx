@@ -27,8 +27,8 @@ export function Hero() {
         <img
           src={heroImage}
           alt={t.hero.imageAlt}
-          width={762}
-          height={567}
+          width={1524}
+          height={1134}
           loading="eager"
           fetchPriority="high"
           decoding="async"

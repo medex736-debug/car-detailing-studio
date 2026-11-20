@@ -37,7 +37,7 @@ export const media: {
   gallery: ImageItem[];
   videos: VideoItem[];
 } = {
-  hero: "WhatsApp Image 2026-11-08 at 20.06.51.jpeg",
+  hero: "WhatsApp Image 2026-11-08 at 20.06.51 (1).jpeg",
   portfolio: [
     {
       file: "WhatsApp Image 2026-11-08 at 20.06.53.jpeg",
